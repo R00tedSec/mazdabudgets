@@ -10,9 +10,9 @@ ABOUT_ME = {
     "- 🧑‍💻Mi [Github](https://github.com/R00tedSec)"
 }
 CHANGELOG = {
-    "Version 1.0.0:",
+    "##### Version 1.0.0:  ",
     "- Primera version del comparador de precios",
-    "- Por ahora solo se soporta Mazda 3 motorizacion 122 CV BP 2023"
+    "- Por ahora solo se soporta Mazda 3 (122,150,186 CV Manual/Automatico)"
 }
 
 st.set_page_config(layout="wide")
