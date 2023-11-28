@@ -9,9 +9,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     software-properties-common \
     git \
+    python3-bs4 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/streamlit/streamlit-example.git .
+RUN git clone https://github.com/R00tedSec/mazdabudgets.git .
 
 RUN pip3 install -r requirements.txt
 
