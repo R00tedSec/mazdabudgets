@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import time
 import pandas as pd
 import streamlit as st
+import numpy as np
 
 ABOUT_ME = {
     "Si te gusta lo que hago puedes seguirme en :",
@@ -10,9 +11,9 @@ ABOUT_ME = {
     "- 🧑‍💻Mi [Github](https://github.com/R00tedSec)"
 }
 CHANGELOG = {
-    "##### Version 1.0.0:  ",
+    "Version 1.0.0:",
     "- Primera version del comparador de precios",
-    "- Por ahora solo se soporta Mazda 3 (122,150,186 CV Manual/Automatico)"
+    "- Por ahora solo se soporta Mazda 3 motorizacion 122 CV BP 2023"
 }
 
 st.set_page_config(layout="wide")
@@ -21,27 +22,29 @@ df = pd.read_csv('rev_list_mazda3.txt',sep=";")
 st.title('Comparador de precios revisiones Mazda España')
 
 
-numeroRevision_elegida = st.sidebar.selectbox('Modelo Coche:', ["Mazda 3"])
+modelo = st.sidebar.selectbox('Modelo Coche:', ["Mazda 3"])
 
-provincias = df['Provincia'].drop_duplicates()
+provincias = pd.unique(df['Provincia'])
+provincias = np.append("Todas",provincias)
 provincia_elegida = st.sidebar.selectbox('Provincia:', provincias)
-df = df.iloc[0:][df["Provincia"] == provincia_elegida]
+if provincia_elegida != "Todas":
+    print(provincia_elegida)
+    df = df.iloc[0:][df["Provincia"] == provincia_elegida]
 
-numeroRevision = df['Revision'].drop_duplicates()
+numeroRevision = pd.unique(df['Revision'])
+numeroRevision = np.append("Todas",numeroRevision)
 numeroRevision_elegida = st.sidebar.selectbox('Numero de revision:', numeroRevision)
-df = df.iloc[0:][df["Revision"] == numeroRevision_elegida]
-
-
-motores = df['Motor'].drop_duplicates()
-motor_elegida = st.sidebar.selectbox('Motor:', motores)
-df = df.iloc[0:][df["Motor"] == motor_elegida]
-
-Transmision = df['Transmision'].drop_duplicates()
-Transmision_elegida = st.sidebar.selectbox('Transmision:', Transmision)
-df = df.iloc[0:][df["Transmision"] == Transmision_elegida]
-
-
 print(df)
+if numeroRevision_elegida != "Todas":
+    df = df.iloc[0:][df["Revision"] == int(numeroRevision_elegida)]
+    print(df)
+
+motores = pd.unique(df['Motor'])
+motores = np.append("Todos",motores)
+motor_elegida = st.sidebar.selectbox('Motor:', motores)
+if motor_elegida != "Todos":
+    df = df.iloc[0:][df["Motor"] == motor_elegida]
+
 
 height = int(35.2*(len(df.index)+1))
 
