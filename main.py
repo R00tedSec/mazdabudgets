@@ -45,10 +45,11 @@ motor_elegida = st.sidebar.selectbox('Motor:', motores)
 if motor_elegida != "Todos":
     df = df.iloc[0:][df["Motor"] == motor_elegida]
 
-
-height = int(35.2*(len(df.index)+1))
-
-st.dataframe(df.set_index(df.columns[0]),width=2000,height=height)
+if motor_elegida != "Todos" or provincia_elegida != "Todas" or numeroRevision_elegida != "Todas":
+    height = int(35.2*(len(df.index)+1))
+    st.dataframe(df.set_index(df.columns[0]),width=2000,height=height)
+else:
+    st.dataframe(df.set_index(df.columns[0]),width=2000)
 
 
 # --- Projects & Accomplishments ---
