@@ -13,7 +13,7 @@ ABOUT_ME = {
 CHANGELOG = {
     "Version 1.0.0:",
     "- Primera version del comparador de precios",
-    "- Por ahora solo se soporta Mazda 3 motorizacion 122 CV BP 2023"
+    "- Por ahora solo se soporta Mazda 3 BP 2023"
 }
 
 st.set_page_config(layout="wide")
